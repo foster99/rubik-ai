@@ -125,7 +125,6 @@ class Cube:
         self.back = np.rot90(self.back, 2)
 
         # Rotate edges
-        self.top = np.rot90(self.top, 1)
         tmp = self.left[0, :].copy()
         self.left[0, :] = self.back[0, :]
         self.back[0, :] = self.right[0, :]
