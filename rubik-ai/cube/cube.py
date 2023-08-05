@@ -54,6 +54,10 @@ class Cube:
         self.bottom[:, 2] = self.front[:, 2]
         self.front[:, 2] = tmp
 
+    def r2(self):
+        self.r()
+        self.r()
+
     def l(self):
         # Rotate face
         self.left = np.rot90(self.left, -1)
@@ -75,6 +79,10 @@ class Cube:
         self.front[:, 0] = self.bottom[:, 0]
         self.bottom[:, 0] = self.back[:, 0]
         self.back[:, 0] = tmp
+
+    def l2(self):
+        self.l()
+        self.l()
 
     def u(self):
         # Rotate face
@@ -110,6 +118,10 @@ class Cube:
         # Rotate back-face back
         self.back = np.rot90(self.back, 2)
 
+    def u2(self):
+        self.u()
+        self.u()
+
     def d(self):
         # Rotate face
         self.bottom = np.rot90(self.bottom, -1)
@@ -144,6 +156,10 @@ class Cube:
         # Rotate back-face back
         self.back = np.rot90(self.back, 2)
 
+    def d2(self):
+        self.d()
+        self.d()
+
     def f(self):
         # Rotate face
         self.front = np.rot90(self.front, -1)
@@ -168,6 +184,10 @@ class Cube:
             self.bottom[0, -i] = self.left[-i, 2]
             self.left[-i, 2] = tmp
 
+    def f2(self):
+        self.f()
+        self.f()
+
     def b(self):
         # Rotate face
         self.back = np.rot90(self.back, -1)
@@ -191,6 +211,10 @@ class Cube:
             self.left[i, 0] = self.bottom[2, -i]
             self.bottom[2, -i] = self.right[-i, 2]
             self.right[-i, 2] = tmp
+
+    def b2(self):
+        self.b()
+        self.b()
 
     def print_cube(self):
         space = 5 * ' '
