@@ -272,7 +272,7 @@ class Cube:
     @classmethod
     def run_interactive(cls, cube):
         # define a dictionary that maps user input to cube methods
-        moves = {
+        move_functions = {
             'R': cube.r,
             'R\'': cube.r_,
             'L': cube.l,
@@ -287,22 +287,25 @@ class Cube:
             'B\'': cube.b_,
         }
 
+        input_msg = f"Enter a move in [{', '.join(move_functions.keys())}] or 'q' to quit): "
         # loop until the user enters 'q' to quit
         while True:
             # print the current state of the cube
             cube.print_cube()
 
             # get user input
-            move = input(f"Enter a move {moves.keys()} or 'q' to quit): ")
+            moves = input(input_msg).split(' ')
 
-            # check if the user wants to quit
-            if move == 'q':
-                break
+            for move in moves:
 
-            # check if the move is valid
-            if move not in moves:
-                print("Invalid move!")
-                continue
+                # check if the user wants to quit
+                if move == 'q':
+                    break
 
-            # call the appropriate method to perform the move
-            moves[move]()
+                # check if the move is valid
+                if move not in move_functions:
+                    print("Invalid move!")
+                    continue
+
+                # call the appropriate method to perform the move
+                move_functions[move]()
