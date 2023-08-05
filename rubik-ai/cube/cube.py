@@ -1,5 +1,5 @@
 import colorama
-from colorama import Fore, Back, Style
+from colorama import Fore, Style
 import numpy as np
 
 # color codes
@@ -31,12 +31,8 @@ class Cube:
         self.right = np.full((3, 3), BLUE)
         self.front = np.full((3, 3), RED)
         self.back = np.full((3, 3), ORANGE)
-        self.cube = np.array([self.top, self.bottom, self.left, self.right, self.front, self.back])
 
-    def update_cube(self):
-        self.cube = np.array([self.top, self.bottom, self.left, self.right, self.front, self.back])
-
-    def r(self, update=True):
+    def r(self):
         # Rotate face
         self.right = np.rot90(self.right, -1)
 
@@ -47,11 +43,7 @@ class Cube:
         self.bottom[:, 2] = self.back[:, 2]
         self.back[:, 2] = tmp
 
-        # Update cube
-        if update:
-            self.update_cube()
-
-    def r_(self, update=True):
+    def r_(self):
         # Rotate face
         self.right = np.rot90(self.right, 1)
 
@@ -62,11 +54,7 @@ class Cube:
         self.bottom[:, 2] = self.front[:, 2]
         self.front[:, 2] = tmp
 
-        # Update cube
-        if update:
-            self.update_cube()
-
-    def l(self, update=True):
+    def l(self):
         # Rotate face
         self.left = np.rot90(self.left, -1)
 
@@ -77,11 +65,7 @@ class Cube:
         self.bottom[:, 0] = self.front[:, 0]
         self.front[:, 0] = tmp
 
-        # Update cube
-        if update:
-            self.update_cube()
-
-    def l_(self, update=True):
+    def l_(self):
         # Rotate face
         self.left = np.rot90(self.left, 1)
 
@@ -92,11 +76,7 @@ class Cube:
         self.bottom[:, 0] = self.back[:, 0]
         self.back[:, 0] = tmp
 
-        # Update cube
-        if update:
-            self.update_cube()
-
-    def u(self, update=True):
+    def u(self):
         # Rotate face
         self.top = np.rot90(self.top, -1)
 
@@ -113,11 +93,7 @@ class Cube:
         # [POP] Rotate back-face back
         self.back = np.rot90(self.back, 2)
 
-        # Update cube
-        if update:
-            self.update_cube()
-
-    def u_(self, update=True):
+    def u_(self):
         # Rotate face
         self.top = np.rot90(self.top, 1)
 
@@ -134,11 +110,7 @@ class Cube:
         # Rotate back-face back
         self.back = np.rot90(self.back, 2)
 
-        # Update cube
-        if update:
-            self.update_cube()
-
-    def d(self, update=True):
+    def d(self):
         # Rotate face
         self.bottom = np.rot90(self.bottom, -1)
 
@@ -155,11 +127,7 @@ class Cube:
         # Rotate back-face back
         self.back = np.rot90(self.back, 2)
 
-        # Update cube
-        if update:
-            self.update_cube()
-
-    def d_(self, update=True):
+    def d_(self):
         # Rotate face
         self.bottom = np.rot90(self.bottom, 1)
 
@@ -176,11 +144,7 @@ class Cube:
         # Rotate back-face back
         self.back = np.rot90(self.back, 2)
 
-        # Update cube
-        if update:
-            self.update_cube()
-
-    def f(self, update=True):
+    def f(self):
         # Rotate face
         self.front = np.rot90(self.front, -1)
 
@@ -192,11 +156,7 @@ class Cube:
             self.bottom[0, -i] = self.right[i, 0]
             self.right[i, 0] = tmp
 
-        # Update cube
-        if update:
-            self.update_cube()
-
-    def f_(self, update=True):
+    def f_(self):
         # Rotate face
         self.front = np.rot90(self.front, 1)
 
@@ -208,11 +168,7 @@ class Cube:
             self.bottom[0, -i] = self.left[-i, 2]
             self.left[-i, 2] = tmp
 
-        # Update cube
-        if update:
-            self.update_cube()
-
-    def b(self, update=True):
+    def b(self):
         # Rotate face
         self.back = np.rot90(self.back, -1)
 
@@ -224,11 +180,7 @@ class Cube:
             self.bottom[2, -i] = self.left[i, 0]
             self.left[i, 0] = tmp
 
-        # Update cube
-        if update:
-            self.update_cube()
-
-    def b_(self, update=True):
+    def b_(self):
         # Rotate face
         self.back = np.rot90(self.back, 1)
 
@@ -239,10 +191,6 @@ class Cube:
             self.left[i, 0] = self.bottom[2, -i]
             self.bottom[2, -i] = self.right[-i, 2]
             self.right[-i, 2] = tmp
-
-        # Update cube
-        if update:
-            self.update_cube()
 
     def print_cube(self):
         space = 5 * ' '
