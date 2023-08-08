@@ -1,4 +1,5 @@
 # rubik-ai
 
 Interactive CLI rubiks cube:
-![image](https://user-images.githubusercontent.com/33325349/221533552-62b98307-cbaf-4962-a3b8-aa996ea5ab3e.png)
+![image](https://github.com/foster99/rubik-ai/assets/33325349/f6d9eb59-9f8c-46d1-9c23-5141539a9533)
+
