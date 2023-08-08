@@ -23,6 +23,13 @@ color_codes = {
 
 
 class Cube:
+    _solved_top = np.full((3, 3), WHITE)
+    _solved_bottom = np.full((3, 3), YELLOW)
+    _solved_left = np.full((3, 3), GREEN)
+    _solved_right = np.full((3, 3), BLUE)
+    _solved_front = np.full((3, 3), RED)
+    _solved_back = np.full((3, 3), ORANGE)
+    move_functions = None
 
     def __init__(self):
         self.top = np.full((3, 3), WHITE)
@@ -31,6 +38,46 @@ class Cube:
         self.right = np.full((3, 3), BLUE)
         self.front = np.full((3, 3), RED)
         self.back = np.full((3, 3), ORANGE)
+
+    def get_moves(self):
+        if self.move_functions is None:
+            self.move_functions = {
+                'R': self.r,
+                'R\'': self.r_,
+                '2R': self.r2,
+                'L': self.l,
+                'L\'': self.l_,
+                'L2': self.l2,
+                'U': self.u,
+                'U\'': self.u_,
+                'U2': self.u2,
+                'D': self.d,
+                'D\'': self.d_,
+                'D2': self.d2,
+                'F': self.f,
+                'F\'': self.f_,
+                'F2': self.f2,
+                'B': self.b,
+                'B\'': self.b_,
+            }
+        return self.move_functions
+
+    def is_solved(self):
+        return np.array_equal(self.top, self._solved_top) \
+            and np.array_equal(self.bottom, self._solved_bottom) \
+            and np.array_equal(self.left, self._solved_left) \
+            and np.array_equal(self.right, self._solved_right) \
+            and np.array_equal(self.front, self._solved_front) \
+            and np.array_equal(self.back, self._solved_back)
+
+    def move(self, moves: list[str]):
+        cube_moves = self.get_moves()
+        for move in moves:
+            if move in cube_moves:
+                cube_moves[move]()
+            else:
+                print(f'Invalid move {move}. Skipping it...')
+
 
     def r(self):
         # Rotate face
@@ -245,22 +292,9 @@ class Cube:
     @classmethod
     def run_interactive(cls, cube):
         # define a dictionary that maps user input to cube methods
-        move_functions = {
-            'R': cube.r,
-            'R\'': cube.r_,
-            'L': cube.l,
-            'L\'': cube.l_,
-            'U': cube.u,
-            'U\'': cube.u_,
-            'D': cube.d,
-            'D\'': cube.d_,
-            'F': cube.f,
-            'F\'': cube.f_,
-            'B': cube.b,
-            'B\'': cube.b_,
-        }
-
-        input_msg = f"Enter a move in [{', '.join(move_functions.keys())}] or 'q' to quit): "
+        move_functions = cube.get_moves()
+        exit_command = 'exit'
+        input_msg = f"Enter a move in [{', '.join(move_functions.keys())}] or '{exit_command}' to quit): "
         # loop until the user enters 'q' to quit
         while True:
             # print the current state of the cube
@@ -269,16 +303,13 @@ class Cube:
             # get user input
             moves = input(input_msg).split(' ')
 
-            for move in moves:
+            # check if user wants to exit
+            if exit_command in moves:
+                return
 
-                # check if the user wants to quit
-                if move == 'q':
-                    break
+            # perform moves
+            cube.move(moves)
 
-                # check if the move is valid
-                if move not in move_functions:
-                    print("Invalid move!")
-                    continue
-
-                # call the appropriate method to perform the move
-                move_functions[move]()
+            # check if solved
+            if cube.is_solved():
+                print("Solved!!")
