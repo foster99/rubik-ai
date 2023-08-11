@@ -265,29 +265,29 @@ class Cube:
 
     def print_cube(self):
         margin = 36 * ' '
-        space = 5 * ' '
+        space = 9 * ' '
 
         # print the top face
         for i in range(3):
-            row = [color_codes[self.top[i, j]] + '█' + Style.RESET_ALL for j in range(3)]
-            print(f"{margin}{space} {' '.join(row)}")
+            row = [color_codes[self.top[i, j]] + '██ ' + Style.RESET_ALL for j in range(3)]
+            print(f"{margin}{space}{''.join(row)}")
 
         # print the left, front, and right faces
         for i in range(3):
-            left_row = [color_codes[self.left[i, j]] + '█' + Style.RESET_ALL for j in range(3)]
-            front_row = [color_codes[self.front[i, j]] + '█' + Style.RESET_ALL for j in range(3)]
-            right_row = [color_codes[self.right[i, j]] + '█' + Style.RESET_ALL for j in range(3)]
-            print(f"{margin}{' '.join(left_row)} {' '.join(front_row)} {' '.join(right_row)}")
+            left_row = [color_codes[self.left[i, j]] + '██ ' + Style.RESET_ALL for j in range(3)]
+            front_row = [color_codes[self.front[i, j]] + '██ ' + Style.RESET_ALL for j in range(3)]
+            right_row = [color_codes[self.right[i, j]] + '██ ' + Style.RESET_ALL for j in range(3)]
+            print(f"{margin}{''.join(left_row)}{''.join(front_row)}{''.join(right_row)}")
 
         # print the bottom face
         for i in range(3):
-            row = [color_codes[self.bottom[i, j]] + '█' + Style.RESET_ALL for j in range(3)]
-            print(f"{margin}{space} {' '.join(row)}")
+            row = [color_codes[self.bottom[i, j]] + '██ ' + Style.RESET_ALL for j in range(3)]
+            print(f"{margin}{space}{''.join(row)}")
 
         # print the back face
         for i in range(3):
-            row = [color_codes[self.back[i, j]] + '█' + Style.RESET_ALL for j in range(3)]
-            print(f"{margin}{space} {' '.join(row)}")
+            row = [color_codes[self.back[i, j]] + '██ ' + Style.RESET_ALL for j in range(3)]
+            print(f"{margin}{space}{''.join(row)}")
 
     @classmethod
     def run_interactive(cls, cube):
